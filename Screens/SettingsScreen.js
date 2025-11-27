@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Text, List, Switch, Snackbar, Button } from 'react-native-paper';
-import { ThemeContext } from '../ThemeContext';  
+import {StyleSheet, View} from 'react-native';
+import {List, Switch, Snackbar, Button } from 'react-native-paper';
 
 export default function SettingsScreen() {
   const [sounds, setSounds] = React.useState(true);
@@ -12,31 +11,13 @@ export default function SettingsScreen() {
       <Text variant="headlineMedium" style={styles.mb16}>Settings</Text>
 
       <List.Section>
-
-        {/* DARK MODE SWITCH */}
-        <List.Item
-          title="Dark Mode"
-          description={isDark ? 'Enabled' : 'Disabled'}
-          right={() => (
-            <Switch 
-              value={isDark} 
-              onValueChange={toggleTheme}  
-              />
-          )}
-        />
-
-        {/* SOUNDS SWITCH (your original) */}
         <List.Item
           title="Sounds"
           description={sounds ? 'On' : 'Off'}
           right={() => (
-            <Switch 
-              value={sounds} 
-              onValueChange={() => setSounds(!sounds)} 
-            />
+            <Switch value={sounds} onValueChange={() => setSounds(!sounds)} />
           )}
         />
-
       </List.Section>
 
       <Button mode="contained" onPress={() => setSnack(true)}>

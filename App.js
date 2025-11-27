@@ -6,14 +6,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 
-//NOTE - Theme Context Import (for Light / Dark mode)
-import { ThemeProvider, ThemeContext } from './ThemeContext';
-
 //NOTE - Screen Imports of the screens in our APP
 import HomeScreen from './Screens/HomeScreen';
 import SettingsScreen from './Screens/SettingsScreen';
 import DetailsScreen from './Screens/DetailsScreen';
-import TasksScreen from './Screens/TasksScreen';
 
 //ANCHOR - Primary Nav Approach
 const Tab = createBottomTabNavigator();
@@ -29,8 +25,6 @@ function Tabs() {
           let iconName;
           if (route.name === 'Home') {
             iconName = 'home-outline';
-          } else if (route.name === 'Tasks') {
-            iconName = 'list-outline';
           } else if (route.name === 'Settings') {
             iconName = 'settings-outline';
           }
@@ -40,7 +34,6 @@ function Tabs() {
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Tasks" component={TasksScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
   );
@@ -50,24 +43,18 @@ function Tabs() {
 //SECTION - Main APP wrapper
 export default function App() {
   return (
-    <ThemeProvider>
-      <ThemeContext.Consumer>
-        {({ theme }) => (
-          <PaperProvider theme={theme}>
-            <NavigationContainer theme={theme}>
-              <Stack.Navigator>
-                <Stack.Screen
-                  name="Root"
-                  component={Tabs}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen name="Details" component={DetailsScreen} />
-              </Stack.Navigator>
-            </NavigationContainer>
-          </PaperProvider>
-        )}
-      </ThemeContext.Consumer>
-    </ThemeProvider>
+    <PaperProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Root"
+            component={Tabs}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="Details" component={DetailsScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </PaperProvider>
   );
 }
 //!SECTION
